@@ -6,7 +6,7 @@
 /*   By: noa <noa@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:18:39 by noa               #+#    #+#             */
-/*   Updated: 2023/06/21 22:39:20 by noa              ###   ########.fr       */
+/*   Updated: 2023/06/23 13:23:45 by noa              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	check_eat(t_philo *philo, t_simulation *simulation)
 
 	time_since_meal = (int32_t)get_current_time_(simulation) - \
 		get_last_meal_time(philo);
-	if (time_since_meal >= simulation->params.time_to_die)
+	if (time_since_meal > simulation->params.time_to_die)
 	{
 		relase_forks(philo);
 		set_philo_state(philo, DEAD);
@@ -50,7 +50,7 @@ void	check_sleep(t_philo *philo, t_simulation *simulation)
 
 	time_since_meal = (int32_t)(get_current_time_(simulation) - \
 		get_last_meal_time(philo));
-	if (time_since_meal >= simulation->params.time_to_die)
+	if (time_since_meal > simulation->params.time_to_die)
 	{
 		set_philo_state(philo, DEAD);
 		say_state(philo, "died");
@@ -70,7 +70,7 @@ void	check_thinking(t_philo *philo, t_simulation *simulation)
 
 	time_since_meal = (int32_t)(get_current_time_(simulation) - \
 		get_last_meal_time(philo));
-	if (time_since_meal >= simulation->params.time_to_die)
+	if (time_since_meal > simulation->params.time_to_die)
 	{
 		set_philo_state(philo, DEAD);
 		say_state(philo, "died");
@@ -80,7 +80,7 @@ void	check_thinking(t_philo *philo, t_simulation *simulation)
 		set_philo_state(philo, EATING);
 		take_forks(philo);
 		new_meal(philo, philo->last_event_time);
-		say_state(philo, "is_eating");
+		say_state(philo, "is eating");
 		usleep(300);
 	}
 }

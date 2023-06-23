@@ -6,7 +6,7 @@
 /*   By: noa <noa@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:17:43 by noa               #+#    #+#             */
-/*   Updated: 2023/06/21 22:55:44 by noa              ###   ########.fr       */
+/*   Updated: 2023/06/23 13:24:24 by noa              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	main(int ac, char **av)
 	if (!init_monitor(&monitor, params))
 		return (EXIT_FAILURE);
 	take_current_time(&monitor.simulation);
-	pthread_create(&timer, NULL, ask_time, &monitor.simulation);
-	if (!start_monitor(&monitor))
+	if (!start_monitor(&monitor) || \
+		pthread_create(&timer, NULL, ask_time, &monitor.simulation))
 	{
 		destroy_monitor(&monitor);
 		return (EXIT_FAILURE);
